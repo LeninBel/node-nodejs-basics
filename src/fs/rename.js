@@ -11,7 +11,6 @@ const rename = async () => {
 
     try {
         const dirContent = await readdir(filesDir);
-        console.log(dirContent);
         if ((dirContent.indexOf(OLD_FILE) === -1 && dirContent.indexOf(NEW_FILE) === -1) || dirContent.indexOf(NEW_FILE) !== -1) {
             throw new Error('FS operation failed');
         }
