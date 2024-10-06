@@ -1,10 +1,10 @@
-import { rm, readdir, statfs } from 'node:fs/promises';
+import { readdir } from 'node:fs/promises';
 import { existsSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'url';
 import { getDirs } from '../utils/getDirs.js';
 import * as path from 'path'
 
-const { filesDir, currentDir } = getDirs(fileURLToPath(import.meta.url));
+const { filesDir } = getDirs(fileURLToPath(import.meta.url));
 
 const list = async () => {
     try {
