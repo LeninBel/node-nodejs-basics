@@ -1,5 +1,32 @@
+import { rm, readdir, statfs } from 'node:fs/promises';
+import { existsSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'url';
+import { getDirs } from '../utils/getDirs.js';
+import * as path from 'path'
+
+const { filesDir, currentDir } = getDirs(fileURLToPath(import.meta.url));
+
 const list = async () => {
-    // Write your code here 
+    try {
+        if (!existsSync(filesDir)) {
+            throw new Error('FS operation failed');
+        }
+
+        const dirContent = await readdir(filesDir)
+        .then(res => {
+          return   res.filter(item => {
+                const itemPath = path.resolve(filesDir, `./${item}`);
+                return statSync(itemPath).isFile();
+            })
+
+        })
+            
+        console.log(dirContent);
+
+
+    } catch (error) {
+        throw new Error(error.message);
+    }
 };
 
 await list();
