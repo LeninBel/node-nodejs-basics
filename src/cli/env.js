@@ -9,7 +9,7 @@ const parseEnv = () => {
      return acc;
    }, []);
 
-   console.log(rss_vars.join(';'));
+   console.log(rss_vars.join('; '));
 };
 
 parseEnv();
