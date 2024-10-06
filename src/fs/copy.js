@@ -5,17 +5,18 @@ import * as path from 'path'
 
 const { filesDir, currentDir } = getDirs(fileURLToPath(import.meta.url));
 
-const COPY_DIR = 'files_copy';
-const copyPath = path.resolve(currentDir, `.//${COPY_DIR}`);
+const DIST_DIR = 'files_copy';
+const SOURCE_DIR = 'files';
+const distPath = path.resolve(currentDir, `.//${DIST_DIR}`);
 
 const copy = async () => {
 
     try {
        const dirContent = await readdir(currentDir);
-       if(dirContent.indexOf( 'files_copy') !== -1 || dirContent.indexOf('files') === -1) {
+       if(dirContent.indexOf( DIST_DIR) !== -1 || dirContent.indexOf(SOURCE_DIR) === -1) {
         throw new Error('FS operation failed');
        }
-      await cp(filesDir, copyPath , {recursive: true});
+      await cp(filesDir, distPath , {recursive: true});
         
     } catch (error) {
         throw new Error(error.message);
